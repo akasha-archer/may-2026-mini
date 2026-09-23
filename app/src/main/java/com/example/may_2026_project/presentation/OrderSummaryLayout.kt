@@ -18,9 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.may_2026_project.R
@@ -40,7 +38,6 @@ fun OrderSummary(
         )
 
         HorizontalDivider()
-
         UserInputButtonGroup()
     }
 }
@@ -51,7 +48,6 @@ fun PageHeading(
 ) {
     Row(
         modifier = modifier
-            .padding(16.dp)
             .fillMaxWidth()
     ) {
         Icon(
@@ -75,7 +71,6 @@ fun ProductListing(
 ) {
     Row(
         modifier = modifier
-            .padding(16.dp)
             .fillMaxWidth()
     ) {
         Image(
@@ -89,70 +84,76 @@ fun ProductListing(
                 .padding(start = 16.dp, top = 12.dp)
                 .fillMaxWidth()
         ) {
-            Text(
-                text = "premium",
-                modifier = modifier.fillMaxWidth()
-            )
-            Text(
-                text = "blend",
-                modifier = modifier.fillMaxWidth()
-            )
-            Text(
-                text = "$2.99",
-                modifier = modifier.fillMaxWidth()
-            )
+            ItemText(itemText = "premium")
+            ItemText(itemText = "blend")
+            ItemText(itemText = "$24.99")
         }
     }
 }
+
 
 @Composable
 fun UserInputButtonGroup(
     modifier: Modifier = Modifier,
     onClickCount: () -> Unit = {},
-    onRequestCount: () -> Unit = {}
+    onRequestCount: () -> Unit = {},
+    clickCount: Int = 0,
+    requestCount: Int = 0
 ) {
     Column(
         modifier = modifier
-            .padding(top = 48.dp)
+            .padding(top = 24.dp)
             .fillMaxWidth()
     ) {
         Text(
             text = "Debug Info",
             modifier = Modifier.fillMaxWidth()
         )
-        Button(
-            modifier = Modifier
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(12),
-            onClick = onClickCount
-        ) {
-            Text(
-                text = "Clicks",
-                textAlign = TextAlign.Start
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = "1234",
-                textAlign = TextAlign.End
-            )
-        }
+        UserButton(
+            buttonText = "Clicks",
+            onItemClick = onClickCount,
+            userInteractionCount = clickCount
+        )
 
-        Button(
-            modifier = Modifier
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(12),
-            onClick = onRequestCount
-        ) {
-            Text(
-                text = "Requests started",
-                textAlign = TextAlign.Start
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = "1234",
-                textAlign = TextAlign.End
-            )
-        }
+        UserButton(
+            buttonText = "Requests Started",
+            onItemClick = onRequestCount,
+            userInteractionCount = requestCount
+        )
+    }
+}
+
+@Composable
+fun ItemText(
+    modifier: Modifier = Modifier,
+    itemText: String
+) {
+    Text(
+        text = itemText,
+        modifier = modifier.fillMaxWidth()
+    )
+}
+
+@Composable
+fun UserButton(
+    modifier: Modifier = Modifier,
+    onItemClick: () -> Unit = {},
+    buttonText: String,
+    userInteractionCount: Int = 0,
+) {
+    Button(
+        modifier = modifier
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(12),
+        onClick = onItemClick
+    ) {
+        Text(
+            text = buttonText,
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = userInteractionCount.toString(),
+        )
     }
 }
 
