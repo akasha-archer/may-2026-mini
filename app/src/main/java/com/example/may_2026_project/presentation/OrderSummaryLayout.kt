@@ -41,7 +41,7 @@ fun OrderSummary(
 
         HorizontalDivider()
 
-        UserInput()
+        UserInputButtonGroup()
     }
 }
 
@@ -106,7 +106,7 @@ fun ProductListing(
 }
 
 @Composable
-fun UserInput(
+fun UserInputButtonGroup(
     modifier: Modifier = Modifier,
     onClickCount: () -> Unit = {},
     onRequestCount: () -> Unit = {}
@@ -122,7 +122,6 @@ fun UserInput(
         )
         Button(
             modifier = Modifier
-                .testTag("clicks-button")
                 .fillMaxWidth(),
             shape = RoundedCornerShape(12),
             onClick = onClickCount
@@ -140,7 +139,6 @@ fun UserInput(
 
         Button(
             modifier = Modifier
-                .testTag("request-count-button")
                 .fillMaxWidth(),
             shape = RoundedCornerShape(12),
             onClick = onRequestCount
