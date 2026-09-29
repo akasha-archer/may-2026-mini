@@ -8,6 +8,7 @@ schema: spec-driven
 #     Tech stack: TypeScript, React, Node.js
 #     We use conventional commits
 #     Domain: e-commerce platform
+#     UI files live in /Users/akashaarcher/AI-Mentorship/may-2026-debounce-challenge where sub-folders are semantically named for each feature
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
