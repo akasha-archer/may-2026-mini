@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 data class OrderUiState(
     val clickCount: Int = 0,
@@ -49,7 +50,7 @@ class OrderSummaryViewModel : ViewModel() {
                 orderStatus = OrderStatus.PROCESSING
             )
 
-            val delayDuration = (MIN_DELAY_MS..MAX_DELAY_MS).random()
+            val delayDuration = (MIN_DELAY_MS..MAX_DELAY_MS).random().milliseconds
             delay(delayDuration)
 
             uiState = uiState.copy(orderStatus = OrderStatus.DONE)
