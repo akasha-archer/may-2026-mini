@@ -12,6 +12,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class OrderSummaryViewModelTest {
@@ -61,7 +62,7 @@ class OrderSummaryViewModelTest {
         assertEquals(OrderStatus.PROCESSING, viewModel.uiState.orderStatus)
 
         // Advance past max simulated delay (3000ms)
-        advanceTimeBy(3500)
+        advanceTimeBy(3500.milliseconds)
 
         // Operation completes
         assertEquals(OrderStatus.DONE, viewModel.uiState.orderStatus)
@@ -75,7 +76,7 @@ class OrderSummaryViewModelTest {
 
         // First operation
         viewModel.onPlaceOrderClick()
-        advanceTimeBy(3500)
+        advanceTimeBy(3500.milliseconds)
         assertEquals(OrderStatus.DONE, viewModel.uiState.orderStatus)
 
         // Tap again from DONE state
@@ -87,7 +88,7 @@ class OrderSummaryViewModelTest {
         assertEquals(1, viewModel.uiState.requestCount)
         assertEquals(OrderStatus.PROCESSING, viewModel.uiState.orderStatus)
 
-        advanceTimeBy(3500)
+        advanceTimeBy(3500.milliseconds)
         assertEquals(OrderStatus.DONE, viewModel.uiState.orderStatus)
     }
 }
